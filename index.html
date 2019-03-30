@@ -27,6 +27,58 @@
                 img.src = xhr.responseURL;
             }
         }
+
+        setTimeout(function () {
+            xhr.open('GET', 'https://source.unsplash.com/300x300/?humans', true);
+            xhr.send(null);
+            xhr.onload = function () {
+                if (xhr.status !== 200){
+                    alert(`Error ${xhr.status}: ${xhr.statusText}`);
+                } else {
+                    context = canvas.getContext("2d");
+                    img = new Image();
+                    img.onload = function () {
+                        context.drawImage(img, 300, 0);
+                    };
+                    img.src = xhr.responseURL;
+                }
+            }
+        }, 2000);
+
+        setTimeout(function () {
+            xhr.open('GET', 'https://source.unsplash.com/300x300/?home,work,office', true);
+            xhr.send(null);
+            xhr.onload = function () {
+                if (xhr.status !== 200){
+                    alert(`Error ${xhr.status}: ${xhr.statusText}`);
+                } else {
+                    context = canvas.getContext("2d");
+                    img = new Image();
+                    img.onload = function () {
+                        context.drawImage(img, 0, 300);
+                    };
+                    img.src = xhr.responseURL;
+                }
+            }
+        }, 4000);
+
+        setTimeout(function () {
+            xhr.open('GET', 'https://source.unsplash.com/300x300/?road', true);
+            xhr.send(null);
+            xhr.onload = function () {
+                if (xhr.status !== 200){
+                    alert(`Error ${xhr.status}: ${xhr.statusText}`);
+                } else {
+                    context = canvas.getContext("2d");
+                    img = new Image();
+                    img.onload = function () {
+                        context.drawImage(img, 300, 300);
+                    };
+                    img.src = xhr.responseURL;
+                }
+            }
+        }, 6000);
+        
     </script>
 </body>
 </html>
