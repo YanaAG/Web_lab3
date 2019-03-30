@@ -11,6 +11,22 @@
         canvas.height = 600;
         canvas.style.border = "1px solid";
         document.body.appendChild(canvas);
+
+        xhr = new XMLHttpRequest();
+        xhr.open('GET', 'https://source.unsplash.com/300x300/?nature,winter,summer,autumn,spring', true);
+        xhr.send(null);
+        xhr.onload = function () {
+            if (xhr.status !== 200){
+                alert(`Error ${xhr.status}: ${xhr.statusText}`);
+            } else {
+                context = canvas.getContext("2d");
+                img = new Image();
+                img.onload = function () {
+                    context.drawImage(img, 0, 0);
+                };
+                img.src = xhr.responseURL;
+            }
+        }
     </script>
 </body>
 </html>
