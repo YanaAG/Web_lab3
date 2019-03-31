@@ -10,10 +10,20 @@
         canvas.width = 600;
         canvas.height = 600;
         canvas.style.border = "1px solid";
+        context = canvas.getContext("2d");
+        context.filter = 'brightness(0.4)';
         document.body.appendChild(canvas);
 
+        min_x = 200;
+        max_x = 400;
+        var x = Math.round(Math.random() * (max_x - min_x) + min_x);
+
+        min_y = 150;
+        max_y = 450;
+        var y = Math.round(Math.random() * (max_y - min_y) + min_y);
+
         xhr = new XMLHttpRequest();
-        xhr.open('GET', 'https://source.unsplash.com/300x300/?nature,winter,summer,autumn,spring', true);
+        xhr.open('GET', 'https://source.unsplash.com/random/?nature,winter,summer,autumn,spring', true);
         xhr.send(null);
         xhr.onload = function () {
             if (xhr.status !== 200){
@@ -22,14 +32,14 @@
                 context = canvas.getContext("2d");
                 img = new Image();
                 img.onload = function () {
-                    context.drawImage(img, 0, 0);
+                    context.drawImage(img, 0, 0, x, y);
                 };
                 img.src = xhr.responseURL;
             }
-        }
+        };
 
         setTimeout(function () {
-            xhr.open('GET', 'https://source.unsplash.com/300x300/?humans', true);
+            xhr.open('GET', 'https://source.unsplash.com/random/?humans', true);
             xhr.send(null);
             xhr.onload = function () {
                 if (xhr.status !== 200){
@@ -38,7 +48,7 @@
                     context = canvas.getContext("2d");
                     img = new Image();
                     img.onload = function () {
-                        context.drawImage(img, 300, 0);
+                        context.drawImage(img, x, 0, canvas.width - x, y);
                     };
                     img.src = xhr.responseURL;
                 }
@@ -46,7 +56,7 @@
         }, 2000);
 
         setTimeout(function () {
-            xhr.open('GET', 'https://source.unsplash.com/300x300/?home,work,office', true);
+            xhr.open('GET', 'https://source.unsplash.com/random/?home,work,office', true);
             xhr.send(null);
             xhr.onload = function () {
                 if (xhr.status !== 200){
@@ -55,7 +65,7 @@
                     context = canvas.getContext("2d");
                     img = new Image();
                     img.onload = function () {
-                        context.drawImage(img, 0, 300);
+                        context.drawImage(img, 0, y, x, canvas.height - y);
                     };
                     img.src = xhr.responseURL;
                 }
@@ -63,7 +73,7 @@
         }, 4000);
 
         setTimeout(function () {
-            xhr.open('GET', 'https://source.unsplash.com/300x300/?road', true);
+            xhr.open('GET', 'https://source.unsplash.com/random/?road', true);
             xhr.send(null);
             xhr.onload = function () {
                 if (xhr.status !== 200){
@@ -72,7 +82,7 @@
                     context = canvas.getContext("2d");
                     img = new Image();
                     img.onload = function () {
-                        context.drawImage(img, 300, 300);
+                        context.drawImage(img, x, y, canvas.width - x, canvas.height - y);
                     };
                     img.src = xhr.responseURL;
                 }
@@ -88,6 +98,7 @@
                     alert(`Error ${xhr_.status}: ${xhr_.statusText}`);
                 } else {
                     context = canvas.getContext("2d");
+                    context.filter = "none";
                     context.font = "22px Verdana";
                     context.fillStyle = "#fff";
                     context.textBaseline = "bottom";
