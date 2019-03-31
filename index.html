@@ -14,6 +14,14 @@
         context.filter = 'brightness(0.4)';
         document.body.appendChild(canvas);
 
+        button = document.createElement("button");
+        button.innerHTML = "DOWNLOAD";
+        button.style.position = "absolute";
+        button.style.top = "620px";
+        button.style.left = "8px";
+        button.style.width = "602px";
+        document.body.appendChild(button);
+
         min_x = 200;
         max_x = 400;
         var x = Math.round(Math.random() * (max_x - min_x) + min_x);
