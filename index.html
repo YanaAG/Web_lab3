@@ -15,12 +15,20 @@
         document.body.appendChild(canvas);
 
         button = document.createElement("button");
-        button.innerHTML = "DOWNLOAD";
+        button.innerHTML = "DOWNLOAD COLLAGE";
         button.style.position = "absolute";
-        button.style.top = "620px";
+        button.style.top = "615px";
         button.style.left = "8px";
         button.style.width = "602px";
-        document.body.appendChild(button);
+
+        var link = document.createElement('a');
+        link.appendChild(button);
+        document.body.appendChild(link);
+
+        button.addEventListener('click', function () {
+            link.href = canvas.toDataURL();
+            link.download = "collage.png";
+        });
 
         min_x = 200;
         max_x = 400;
@@ -39,6 +47,7 @@
             } else {
                 context = canvas.getContext("2d");
                 img = new Image();
+                img.crossOrigin = "Anonymous";
                 img.onload = function () {
                     context.drawImage(img, 0, 0, x, y);
                 };
@@ -55,6 +64,7 @@
                 } else {
                     context = canvas.getContext("2d");
                     img = new Image();
+                    img.crossOrigin = "Anonymous";
                     img.onload = function () {
                         context.drawImage(img, x, 0, canvas.width - x, y);
                     };
@@ -72,6 +82,7 @@
                 } else {
                     context = canvas.getContext("2d");
                     img = new Image();
+                    img.crossOrigin = "Anonymous";
                     img.onload = function () {
                         context.drawImage(img, 0, y, x, canvas.height - y);
                     };
@@ -89,6 +100,7 @@
                 } else {
                     context = canvas.getContext("2d");
                     img = new Image();
+                    img.crossOrigin = "Anonymous";
                     img.onload = function () {
                         context.drawImage(img, x, y, canvas.width - x, canvas.height - y);
                     };
