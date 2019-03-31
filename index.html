@@ -78,7 +78,44 @@
                 }
             }
         }, 6000);
-        
+
+        setTimeout(function () {
+            xhr_ = new XMLHttpRequest();
+            xhr_.open('GET', 'https://cors-anywhere.herokuapp.com/http://api.forismatic.com/api/1.0/?method=getQuote&format=text&lang=ru', true);
+            xhr_.send(null);
+            xhr_.onload = function() {
+                if (xhr_.status !== 200) {
+                    alert(`Error ${xhr_.status}: ${xhr_.statusText}`);
+                } else {
+                    context = canvas.getContext("2d");
+                    context.font = "22px Verdana";
+                    context.fillStyle = "#fff";
+                    context.textBaseline = "bottom";
+                    context.textAlign = "center";
+
+                    words = xhr_.responseText.split(" ");
+                    countWords = words.length;
+                    maxWidth = canvas.width;
+                    marginLeft = canvas.width/2;
+                    marginTop = canvas.height/2;
+                    lineHeight = 30;
+                    line = "";
+                    for (var n = 0; n < countWords; n++) {
+                        testLine = line + words[n] + " ";
+                        testWidth = context.measureText(testLine).width;
+                        if (testWidth > maxWidth) {
+                            context.fillText(line, marginLeft, marginTop);
+                            line = words[n] + " ";
+                            marginTop += lineHeight;
+                        }
+                        else {
+                            line = testLine;
+                        }
+                    }
+                    context.fillText(line, marginLeft, marginTop);
+                }
+            };
+        }, 8000);
     </script>
 </body>
 </html>
