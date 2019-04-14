@@ -5,7 +5,7 @@ canvas.style.border = "1px solid";
 
 var context = canvas.getContext("2d");
 context.filter = 'brightness(0.4)';
-// document.body.appendChild(canvas);
+document.body.appendChild(canvas);
 
 var button = document.createElement("button");
 button.innerHTML = "DOWNLOAD COLLAGE";
@@ -16,7 +16,7 @@ button.style.width = "602px";
 
 var link = document.createElement('a');
 link.appendChild(button);
-// document.body.appendChild(link);
+document.body.appendChild(link);
 
 button.addEventListener('click', function () {
     link.href = canvas.toDataURL();
@@ -117,8 +117,8 @@ function loadImages(callback) {
 
 function loadQuote() {
     if (kol_img === 4) {
-        document.body.appendChild(canvas);
-        document.body.appendChild(link);
+        // document.body.appendChild(canvas);
+        // document.body.appendChild(link);
         var xhr_ = new XMLHttpRequest();
         xhr_.open('GET', 'https://cors-anywhere.herokuapp.com/http://api.forismatic.com/api/1.0/?method=getQuote&format=text&lang=ru', true);
         xhr_.send(null);
